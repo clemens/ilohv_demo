@@ -1,8 +1,8 @@
-== README
+# README
 
 Demo application for the [ilohv gem](http://github.com/clemens/ilohv).
 
-=== Setup
+## Setup
 
 Run the following commands
 
