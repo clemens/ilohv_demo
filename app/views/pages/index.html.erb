@@ -1,0 +1,31 @@
+<%= form_tag root_path, method: 'get', class: 'form-inline', style: 'margin: 1em 0;' do %>
+  <div class="form-group">
+    <%= text_field_tag 'directory', params[:directory], class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag 'List directory', class: 'btn btn-default' %>
+  </div>
+<% end %>
+
+<%- if flash[:alert] -%>
+  <div class="alert alert-warning"><%= flash[:alert] %></div>
+<%- end -%>
+
+<%- if @directory.present? -%>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Directory: <%= @directory.name %>
+    </div>
+    <div class="panel-body">
+      <ol class="list-unstyled">
+        <%- @directory.files.each do |file| -%>
+          <li>
+            <h3><%= file.name %></h3>
+            <p><%= link_to 'Direct download', file.direct_url %> | <%= link_to 'Direct via app', file.url %></p>
+            <p class="small"><%= file.content_type %>, <%= number_to_human_size(file.size) %></p>
+          </li>
+        <%- end -%>
+      </ol>
+    </div>
+  </div>
+<%- end -%>
